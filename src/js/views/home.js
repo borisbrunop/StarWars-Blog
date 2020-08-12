@@ -13,14 +13,6 @@ export const Home = () => {
 		actions.fetchPersonajes();
 		actions.fetchPlanets();
 	}, []);
-	console.log(store.people);
-	console.log(
-		store.people.map((peo, id) => {
-			{
-				peo.name;
-			}
-		})
-	);
 
 	return (
 		<>

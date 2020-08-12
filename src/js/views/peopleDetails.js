@@ -7,7 +7,6 @@ import "../../styles/home.scss";
 function PeopleDetails() {
 	const { store, actions } = useContext(Context);
 	const { detailsId } = useParams();
-	console.log(detailsId);
 	return (
 		<>
 			{store.people.map((personaje, id) => {
