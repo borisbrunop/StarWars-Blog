@@ -16,12 +16,10 @@ export const Navbar = () => {
 				<DropdownButton id="dropdown-basic-button" title={"Favorites " + store.favorites.length}>
 					{store.favorites.map((favorites, id) => {
 						return (
-							<>
-								<Dropdown.ItemText key={id} className="d-flex justify-content-between">
-									<a>{favorites.favorito}</a>
-									<i className="fas fa-trash-alt m-2" onClick={e => actions.deleteFavorite(e, id)} />
-								</Dropdown.ItemText>
-							</>
+							<Dropdown.ItemText key={id} className="d-flex justify-content-between">
+								<a>{favorites}</a>
+								<i className="fas fa-trash-alt m-2" onClick={e => actions.deleteFavorite(e, id)} />
+							</Dropdown.ItemText>
 						);
 					})}
 				</DropdownButton>

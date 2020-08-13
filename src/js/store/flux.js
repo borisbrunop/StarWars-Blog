@@ -53,25 +53,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					planets: planets.results
 				});
 			},
-			addFavorites: async (e, name) => {
-				let actions = getActions();
-				setStore({
-					newFavorite: {
-						favorito: name
-					}
-				});
-				await actions.addNewFavorite();
-				await setStore({
-					newFavorite: {
-						favorito: ""
-					}
-				});
-			},
-			addNewFavorite: () => {
+			addNewFavorite: name => {
 				let store = getStore();
-				setStore({
-					favorites: [...store.favorites, store.newFavorite]
-				});
+				let repetido = store.favorites.find(Name => Name == name);
+				console.log(repetido);
+				console.log(name);
+				if (repetido === undefined) {
+					console.log("no esta repetido");
+					setStore({
+						favorites: [...store.favorites, name]
+					});
+				} else {
+					console.log("esta reperito");
+					alert("you cant use the same item");
+				}
 			},
 			deleteFavorite: (e, id) => {
 				let store = getStore();

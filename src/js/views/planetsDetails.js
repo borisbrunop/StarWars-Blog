@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import placeHolder from "../../img/500.png";
@@ -7,6 +7,13 @@ import "../../styles/home.scss";
 function PlanetsDetails() {
 	const { store, actions } = useContext(Context);
 	const { detailsId } = useParams();
+
+	useEffect(() => {
+		if (store.planets.length == 0) {
+			actions.fetchPlanets();
+		}
+	}, []);
+
 	return (
 		<>
 			{store.planets.map((planet, id) => {

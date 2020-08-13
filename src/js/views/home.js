@@ -31,11 +31,11 @@ export const Home = () => {
 									className="m-2"
 									variant="outline-primary"
 									onClick={e => history.push(`/peopleDetails/${id}`)}>
-									Ver Detalles
+									Learn More
 								</Button>
 								<Button
 									variant="outline-warning"
-									onClick={e => actions.addFavorites(e, personajes.name)}>
+									onClick={e => actions.addNewFavorite(personajes.name)}>
 									♥
 								</Button>
 							</Card.Body>
@@ -57,9 +57,9 @@ export const Home = () => {
 									className="m-2"
 									variant="outline-primary"
 									onClick={e => history.push(`/planetsDetails/${id}`)}>
-									Ver Detalles
+									Learn More
 								</Button>
-								<Button variant="outline-warning" onClick={e => actions.addFavorites(e, planets.name)}>
+								<Button variant="outline-warning" onClick={e => actions.addNewFavorite(planets.name)}>
 									♥
 								</Button>
 							</Card.Body>
