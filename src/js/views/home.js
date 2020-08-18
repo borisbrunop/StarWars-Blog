@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import placeHolder from "../../img/300.png";
 import "../../styles/home.scss";
 import { Button, Card, CardGroup } from "react-bootstrap";
@@ -8,18 +8,35 @@ import { useHistory } from "react-router-dom";
 export const Home = () => {
 	const history = useHistory();
 	const { store, actions } = useContext(Context);
+	const [searchPeople, setSearchPeople] = useState("");
+	const [searchPlanets, setSearchPlanets] = useState("");
 
 	useEffect(() => {
 		actions.fetchPersonajes();
 		actions.fetchPlanets();
 	}, []);
 
+	const filteredPeople = store.people.filter(people => {
+		return people.name.toLowerCase().includes(searchPeople.toLocaleLowerCase());
+	});
+	const filteredPlanets = store.planets.filter(planets => {
+		return planets.name.toLowerCase().includes(searchPlanets.toLocaleLowerCase());
+	});
+
+	console.log(filteredPeople);
+
 	return (
 		<>
 			<h1 className="text-danger ml-4 margen">Characters</h1>
+			<input
+				className="w-25 ml-4"
+				type="text"
+				placeholder="Search"
+				onChange={e => setSearchPeople(e.target.value)}
+			/>
 			<div className="">
 				<CardGroup className="card-group-scroll">
-					{store.people.map((personajes, id) => (
+					{filteredPeople.map((personajes, id) => (
 						<Card key={id} style={{ width: "18rem" }} className="m-4 card">
 							<Card.Img variant="top" src={placeHolder} />
 							<Card.Body>
@@ -44,9 +61,15 @@ export const Home = () => {
 				</CardGroup>
 			</div>
 			<h1 className="text-danger ml-4">Planets</h1>
+			<input
+				className="w-25 ml-4"
+				type="text"
+				placeholder="Search"
+				onChange={e => setSearchPlanets(e.target.value)}
+			/>
 			<div className="">
 				<CardGroup className="card-group-scroll">
-					{store.planets.map((planets, id) => (
+					{filteredPlanets.map((planets, id) => (
 						<Card key={id} style={{ width: "18rem" }} className="m-4 card">
 							<Card.Img variant="top" src={placeHolder} />
 							<Card.Body>

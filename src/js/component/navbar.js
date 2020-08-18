@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import StarWarsLogo from "../../img/output-onlinepngtools.png";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown, DropdownButton, FormControl } from "react-bootstrap";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
