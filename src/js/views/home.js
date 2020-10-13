@@ -47,7 +47,7 @@ export const Home = () => {
 								<Button
 									className="m-2"
 									variant="outline-primary"
-									onClick={e => history.push(`/peopleDetails/${id}`)}>
+									onClick={e => history.push(`/peopleDetails/${personajes.name}`)}>
 									Learn More
 								</Button>
 								<Button

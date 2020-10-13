@@ -6,7 +6,7 @@ import "../../styles/home.scss";
 
 function PeopleDetails() {
 	const { store, actions } = useContext(Context);
-	const { detailsId } = useParams();
+	const { name } = useParams();
 
 	useEffect(() => {
 		if (store.people.length == 0) {
@@ -17,7 +17,7 @@ function PeopleDetails() {
 	return (
 		<>
 			{store.people.map((personaje, id) => {
-				if (id === parseInt(detailsId)) {
+				if (personaje.name === name) {
 					return (
 						<div key={id} className="margen">
 							<div className="d-flex flex-inline">

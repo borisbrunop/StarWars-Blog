@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			fetchPersonajes: async () => {
 				let people = [];
+
 				try {
 					let response = await fetch(`https://swapi.dev/api/people/`, {
 						method: "GET",
@@ -19,7 +20,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					if (response.ok) {
-						people = await response.json();
+						let peopleObjc = await response.json();
+						people.push(...peopleObjc.results);
+						while (peopleObjc.next != null) {
+							let newPeopleObjc = peopleObjc.next.replace("http", "https");
+							try {
+								let respuesta = await fetch(`${newPeopleObjc}`, {
+									method: "GET",
+									headers: {
+										"Content-Type": "application/JSON"
+									}
+								});
+								if (respuesta.ok) {
+									peopleObjc = await respuesta.json();
+									people.push(...peopleObjc.results);
+								}
+							} catch (error) {
+								console.log("something failed");
+								console.log(error);
+							}
+						}
 					} else {
 						console.log(`error: ${response.status} ${response.statusText}`);
 					}
@@ -28,7 +48,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 				setStore({
-					people: people.results
+					people
 				});
 			},
 			fetchPlanets: async () => {
